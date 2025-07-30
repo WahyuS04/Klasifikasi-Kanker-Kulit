@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Klasifikasi Kanker Kulit</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SISTEM KLASIFIKASI KANKER KULIT BERBASIS FEW-SHOT LEARNING</h1>
+        
+        <div class="upload-section">
+            <h2>Unggah Gambar</h2>
+            <div class="upload-box" id="drop-zone">
+                <input type="file" id="file-input" accept="image/*" hidden>
+                <div id="upload-prompt" class="upload-content">
+                    <div class="upload-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM3 16l5-5c.928-.893 2.072-.893 3 0l5 5"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                        </svg>
+                    </div>
+                    <p>Seret dan lepas gambar atau klik untuk memilih</p>
+                </div>
+                <div id="preview-container" class="preview-content" style="display: none;">
+                    <img id="preview-image" src="" alt="Preview">
+                    <button type="button" class="remove-btn" onclick="removeImage()">×</button>
+                </div>
+            </div>
+            <button id="classify-btn" class="classify-btn" disabled>Klasifikasi</button>
+        </div>
+
+        <div class="result-section">
+            <h2>Hasil Klasifikasi</h2>
+            <div class="result-box">
+                <div class="image-result">
+                    <img id="result-image" src="placeholder.svg" alt="result">
+                </div>
+                <div class="result-text">
+                    <p>Hasil Klasifikasi untuk gambar berikut adalah :</p>
+                    <p class="result-value" id="classification-result-text">Menunggu Klasifikasi...</p>
+                    <div id="confidence-text" style="display: none;">Tingkat Kepercayaan: <span id="confidence-value"></span></div>
+                    
+                    <div id="classification-details" style="display: none; margin-top: 20px;">
+                        <h3>Informasi Detail:</h3>
+                        <div id="benign-info" style="display: none;">
+                            <div class="info-box" style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                                <h4 style="color: #2e7d32; margin: 0 0 10px 0;">Benign (Jinak)</h4>
+                                <p>Lesi kulit yang terdeteksi kemungkinan besar bersifat jinak. Karakteristik yang terlihat:</p>
+                                <ul>
+                                    <li>Bentuk teratur dan simetris</li>
+                                    <li>Warna relatif seragam</li>
+                                    <li>Tepi yang jelas dan halus</li>
+                                </ul>
+                                <p><strong>Rekomendasi:</strong> Meskipun hasil menunjukkan lesi jinak, tetap disarankan untuk melakukan pemeriksaan rutin ke dokter kulit untuk pemantauan berkelanjutan.</p>
+                            </div>
+                        </div>
+                        <div id="malignant-info" style="display: none;">
+                            <div class="info-box" style="background: #ffeaea; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                                <h4 style="color: #c62828; margin: 0 0 10px 0;">Malignant (Ganas)</h4>
+                                <p>Lesi kulit menunjukkan karakteristik yang perlu perhatian khusus. Tanda-tanda yang terdeteksi:</p>
+                                <ul>
+                                    <li>Bentuk tidak teratur</li>
+                                    <li>Variasi warna yang signifikan</li>
+                                    <li>Tepi yang tidak beraturan</li>
+                                </ul>
+                                <p><strong>Rekomendasi:</strong> Segera konsultasikan hasil ini dengan dokter spesialis kulit untuk evaluasi lebih lanjut dan penanganan yang tepat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <h2>Detail Teknis Model</h2>
+            <div class="model-details">
+                <div class="detail-item">
+                    <h3>Arsitektur</h3>
+                    <p class="value">Prototypical Network</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Backbone</h3>
+                    <p class="value">EfficientNet-B0</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Akurasi</h3>
+                    <p class="value">86,73%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="workflow-section">
+            <h2>Alur Klasifikasi</h2>
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Input Gambar</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Preprocessing</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Ekstraksi Fitur</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p>Klasifikasi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/klasifikasi.js"></script>
+</body>
+</html>
